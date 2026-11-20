@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>FIALA PO · požární ochrana</title>
+<meta name="description" content="FIALA PO – požární ochrana. Nový web připravujeme. Kontakt: info@fiala-po.cz, +420 732 407 350.">
+<meta name="theme-color" content="#241D3B">
+<meta property="og:title" content="FIALA PO · požární ochrana">
+<meta property="og:description" content="Nový web připravujeme. Krásné Vánoce přejí lidé z FIALA PO.">
+<meta property="og:image" content="og.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%232B145E'/%3E%3Crect y='16.67' width='83.33' height='83.33' fill='%236A1B8A'/%3E%3Crect y='33.33' width='66.67' height='66.67' fill='%23C2185B'/%3E%3Crect y='50' width='50' height='50' fill='%23F04A23'/%3E%3Crect y='66.67' width='33.33' height='33.33' fill='%23FF9F1C'/%3E%3Crect y='83.33' width='16.67' height='16.67' fill='%23FFE14D'/%3E%3C/svg%3E">
+<style>
+@font-face{font-family:Geologica;src:url(fonts/Geologica_400Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Geologica;src:url(fonts/Geologica_700Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:Geologica;src:url(fonts/Geologica_800ExtraBold.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url(fonts/JetBrainsMono_500Medium.woff2) format("woff2");font-weight:500;font-display:swap}
+:root{--bg:#241D3B;--line:#2E2650;--edge:#3A3160;--text:#F1EEF6;--muted:#BDB6D2;--yel:#FFE14D;--org:#FF9F1C;
+  --disp:Geologica,"Segoe UI",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:var(--disp);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#teplo{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:0;pointer-events:none}
+.obal{position:relative;z-index:1;max-width:980px;margin:0 auto;padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.07em;text-transform:uppercase;font-size:12.5px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:66px 0}
+.logo svg{height:34px;width:auto;display:block}
+header .mono{color:var(--muted)}
+.svetla{position:absolute;left:0;right:0;top:0;height:60px;z-index:1;pointer-events:none}
+.svetla svg{width:100%;height:100%;display:block;overflow:visible}
+.svetla .b{animation:blik 2.4s steps(1) infinite}
+@keyframes blik{0%,100%{opacity:1}50%{opacity:.35}}
+
+.hero{position:relative;text-align:center;padding-block:40px 30px;touch-action:pan-y}
+.hero.hasim{cursor:none;touch-action:none}
+.plamen{display:flex;justify-content:center;align-items:flex-end;height:min(46vh,380px);min-height:240px}
+.plamen svg{height:100%;width:auto;display:block;shape-rendering:crispEdges}
+.zaklad{width:min(220px,46vw);height:10px;margin:0 auto;background:repeating-linear-gradient(90deg,#6A1B8A 0 18px,#2B145E 18px 20px)}
+.cislo{color:var(--muted);margin:14px 0 0}
+.ovl{display:flex;justify-content:center;gap:10px;margin:14px 0 0;flex-wrap:wrap}
+.btn{font:inherit;font-family:var(--mono);font-weight:500;letter-spacing:.06em;text-transform:uppercase;font-size:12.5px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none;padding:10px 14px;background:transparent;color:var(--text);box-shadow:inset 0 0 0 1.5px var(--edge)}
+.btn:hover{box-shadow:inset 0 0 0 1.5px var(--muted)}
+.btn[aria-pressed="true"]{background:var(--text);color:#1C1530}
+.btn svg{width:16px;height:16px}
+.stav{min-height:24px;margin:10px 0 0;color:var(--muted);font-size:14.5px}
+#pena{position:absolute;inset:0;pointer-events:none;z-index:3}
+.kurzor{position:absolute;left:0;top:0;width:52px;height:52px;pointer-events:none;z-index:4;display:none}
+.hero.hasim .kurzor.vid{display:block}
+
+.text{text-align:center;padding-block:10px 40px}
+.text .mono{color:var(--yel)}
+h1{font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-.02em;margin:12px 0 12px;font-weight:800;text-wrap:balance}
+h1 span{color:var(--org)}
+.text p{color:var(--muted);margin:0 auto;max-width:52ch}
+
+.dole{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--edge);border:1px solid var(--edge);margin:10px 0 30px}
+.dole > div{background:var(--bg);padding:24px 26px}
+.dole .mono{color:var(--muted);font-size:11.5px}
+.dole h2{margin:6px 0 4px;font-size:22px;line-height:1.2;font-weight:700}
+.dole p{margin:0;color:var(--muted)}
+.dole a{color:var(--text);text-decoration:none;font-weight:700;font-size:19px;display:inline-block;margin-top:4px}
+.dole a:hover{color:var(--yel)}
+footer{padding-block:0 32px;color:var(--muted);font-size:13px;text-align:center}
+@media (max-width:640px){.dole{grid-template-columns:1fr}.logo svg{height:28px}header .mono{font-size:11px}}
+:focus-visible{outline:3px solid var(--yel);outline-offset:2px}
+</style>
+</head>
+<body>
+<canvas id="teplo" aria-hidden="true"></canvas>
+<div class="svetla" aria-hidden="true"><svg id="svetla" preserveAspectRatio="none"></svg></div>
+<div class="obal">
+  <header class="top">
+    <a class="logo" href="./" aria-label="FIALA PO"><svg role="img" aria-label="FIALA PO" viewBox="0 0 400 91" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="90.5613" height="90.5613" fill="#2B145E"/>
+<rect y="15.0935" width="75.4677" height="75.4677" fill="#6A1B8A"/>
+<rect y="30.187" width="60.3742" height="60.3742" fill="#C2185B"/>
+<rect y="45.2805" width="45.2806" height="45.2806" fill="#F04A23"/>
+<rect y="60.3743" width="30.1871" height="30.1871" fill="#FF9F1C"/>
+<rect y="75.4678" width="15.0935" height="15.0935" fill="#FFE14D"/>
+<path d="M159.46 26.8877L161.036 26.6795L162.032 26.3987L162.739 26.1089L164.079 25.3482L164.713 24.8682L165.292 24.3339L165.791 23.7543L166.216 23.1204L166.56 22.4502L166.832 21.7167L167.022 20.9469L167.14 20.1228L167.176 19.5523L167.14 18.4022L167.022 17.5871L166.832 16.8173L166.56 16.0928L166.216 15.4227L165.791 14.7888L165.292 14.2092L164.296 13.3398L162.974 12.5247L161.543 11.9723L160.266 11.7006L159.46 11.6282H158.355L157.296 11.7368L156.526 11.8999L155.077 12.4161L154.398 12.7692L153.519 13.3398L153.103 13.6658L152.351 14.3993L152.025 14.7888L151.482 15.64L151.156 16.3283L150.993 16.8173L150.712 18.1214L150.649 18.9636L150.658 19.8421L150.848 21.2096L151.156 22.2057L151.364 22.6766L152.025 23.7543L152.532 24.3339L153.103 24.8682L153.737 25.3482L154.615 25.8825L155.793 26.3987L157.296 26.7791L158.355 26.8877L159.189 26.8968L159.46 26.8877ZM136.684 43.551H146.193V32.4573H136.684V30.3744L136.748 29.6951L136.874 29.2061L137.055 28.7714L137.372 28.2824L137.698 27.9473L138.079 27.6666L138.631 27.3768L139.12 27.2047L139.673 27.0779L140.587 26.9874L142.036 27.0508L142.96 27.2138L143.567 27.3858L144.273 27.6756L144.989 28.065L146.972 17.3969L144.898 16.5275L142.824 15.9208L140.542 15.5314L138.233 15.3774L135.471 15.4861L133.288 15.8121L131.305 16.3555L129.503 17.1162L128.679 17.578L127.537 18.375L126.17 19.6247L125.02 21.0465L124.531 21.8073L123.897 23.0208L123.236 24.7686L122.991 25.7014L122.729 27.1594L122.566 29.2333L122.557 32.4573H115.918V43.551H122.557V72.431H136.684V43.551ZM220.01 16.5456V72.431H234.137V16.5456H220.01ZM187.507 73.5721L189.192 73.4453L191.102 73.1374L192.606 72.748L194.562 72.0054L196.065 71.1994L197.378 70.2575L198.347 69.3519L199.18 68.3557V72.431H211.289V47.7531L211.225 46.295L210.944 44.0219L210.555 42.3375L210.039 40.7798L209.378 39.349L208.581 38.0358L207.902 37.1302L207.168 36.288L206.09 35.2556L205.221 34.5673L203.962 33.7342L202.604 33.0187L201.879 32.7108L200.756 32.2852L199.199 31.8052L197.985 31.5154L195.866 31.1532L193.176 30.9268L191.039 30.9087L189.563 30.9721L188.087 31.1079L185.85 31.4249L183.595 31.8958L181.349 32.5116L179.157 33.2904L178.098 33.7342L176.015 34.7485L174.34 35.7175L177.871 45.2264L179.311 44.2755L180.86 43.4605L182.526 42.7903L184.03 42.3284L186.058 41.8847L187.598 41.6945L189.146 41.613L191.13 41.6855L192.425 41.8666L193.91 42.2832L194.689 42.6363L195.25 42.9624L195.975 43.5329L196.654 44.2936L197.098 45.0453L197.596 46.4218L197.786 47.5538L194.96 47.4361H192.452L190.088 47.5357L187.444 47.7983L185.017 48.1968L183.151 48.6406L181.113 49.2926L179.293 50.0714L177.681 50.9861L176.504 51.8464L175.281 52.9784L174.276 54.2372L173.85 54.9165L173.371 55.8492L172.909 57.099L172.592 58.4121L172.411 60.0875L172.429 61.6723L172.519 62.6323L172.728 63.8639L173.135 65.3038L173.706 66.6441L174.285 67.6403L174.946 68.564L176.078 69.8138L177.373 70.8915L178.324 71.5163L179.882 72.3042L181.267 72.8295L182.427 73.1464L183.921 73.4272L185.488 73.5721L187.154 73.5902L187.507 73.5721ZM197.822 57.425L197.686 58.6114L197.442 59.526L197.07 60.3411L196.301 61.3825L195.567 62.0527L194.843 62.5236L193.756 63.0126L192.56 63.3386L191.428 63.5017L189.662 63.5198L188.159 63.2753L187.163 62.913L186.33 62.3878L185.959 62.0255L185.732 61.7085L185.406 61.0112L185.252 60.0422L185.316 59.1547L185.479 58.5932L185.796 57.9865L186.167 57.5337L186.719 57.0628L187.516 56.5918L188.322 56.2568L189.237 55.9941L190.804 55.7134L192.769 55.5775L195.196 55.6409L197.36 55.8583L197.822 55.9307V57.2439V57.425ZM255.673 73.5721L257.357 73.4453L259.268 73.1374L260.771 72.748L262.465 72.1231L263.751 71.4892L265.345 70.4205L266.332 69.5421L267.346 68.3557V72.431H279.463L279.445 47.255L279.246 44.9094L278.938 43.1616L278.349 41.1602L277.724 39.6931L277.163 38.6788L276.529 37.7279L275.832 36.8404L275.08 36.0163L274.265 35.2556L273.088 34.35L271.802 33.544L270.769 33.0187L269.682 32.5569L267.762 31.9139L266.151 31.5154L264.892 31.28L263.153 31.0536L261.342 30.9268L259.204 30.9087L257.737 30.9721L256.252 31.1079L254.024 31.4249L252.141 31.8052L249.514 32.5116L247.323 33.2904L246.263 33.7342L244.524 34.5673L242.514 35.7175L246.046 45.2264L247.477 44.2755L249.025 43.4605L250.692 42.7903L252.195 42.3284L253.97 41.93L255.763 41.6945L257.312 41.613L259.295 41.6855L260.59 41.8666L262.075 42.2832L262.854 42.6363L263.416 42.9624L264.14 43.5329L264.819 44.2936L265.326 45.1721L265.725 46.2769L265.951 47.5538L263.126 47.4361H260.617L258.254 47.5357L255.609 47.7983L253.182 48.1968L251.317 48.6406L249.279 49.2926L247.459 50.0714L245.847 50.9861L244.669 51.8464L243.447 52.9784L242.442 54.2372L241.654 55.6138L241.156 56.8454L240.757 58.4121L240.594 59.7977L240.585 61.3463L240.685 62.6323L240.893 63.8639L241.3 65.3038L241.88 66.6441L242.451 67.6403L243.112 68.564L244.244 69.8138L245.539 70.8915L246.49 71.5163L247.785 72.1865L249.433 72.8295L250.592 73.1464L252.086 73.4272L253.653 73.5721L255.328 73.5902L255.673 73.5721ZM265.988 57.425L265.852 58.6114L265.607 59.526L265.163 60.4679L264.466 61.3825L263.733 62.0527L263.008 62.5236L261.921 63.0126L260.726 63.3386L259.603 63.5017L257.828 63.5198L256.325 63.2753L255.328 62.913L254.83 62.6323L254.396 62.2972L253.898 61.7085L253.572 61.0112L253.418 60.0422L253.481 59.1547L253.644 58.5932L253.961 57.9865L254.332 57.5337L254.785 57.1352L255.564 56.6552L256.488 56.2568L257.402 55.9941L258.969 55.7134L260.934 55.5775L263.361 55.6409L265.526 55.8583L265.988 55.9307V57.2439V57.425ZM165.972 32.4573H151.844V72.431H165.972V32.4573ZM376.572 73.5811L378.184 73.4906L379.352 73.3547L381.254 73.0106L383.074 72.5125L385.157 71.7246L387.113 70.7556L388.933 69.6417L390.618 68.3648L392.167 66.943L393.335 65.6661L394.584 64.0269L395.49 62.5779L396.559 60.4226L397.057 59.1366L397.464 57.8325L397.845 56.1843L398.144 53.8207L398.18 51.9642L398.008 49.6096L397.691 47.7983L397.075 45.5977L396.396 43.9042L395.336 41.8666L394.322 40.318L393.181 38.8781L391.596 37.2298L389.812 35.7446L388.245 34.676L386.561 33.7161L384.333 32.738L382.449 32.1403L380.484 31.6965L377.912 31.3705L375.34 31.289L373.339 31.3977L371.401 31.6513L370.278 31.8777L368.82 32.258L367.054 32.8738L365.043 33.7885L362.87 35.0473L360.887 36.5144L359.583 37.6917L357.952 39.4848L356.73 41.1421L355.688 42.899L355.227 43.8227L354.692 45.0815L354.04 47.0286L353.66 48.6858L353.361 51.0585L353.334 53.4041L353.56 55.7315L353.913 57.5337L354.584 59.7162L355.299 61.3916L356.168 63.0217L357.454 64.9325L358.93 66.6804L360.253 67.9663L361.693 69.1436L363.667 70.4568L365.822 71.5888L367.633 72.3133L369.535 72.8748L371.528 73.2732L373.592 73.5177L376.164 73.5902L376.572 73.5811ZM375.349 61.5184L373.792 61.3372L372.877 61.0927L371.998 60.7577L371.002 60.2324L370.386 59.8068L369.689 59.2091L369.182 58.6747L368.621 57.9321L368.132 57.108L367.534 55.6409L367.289 54.6357L367.163 53.7935L367.099 52.6705L367.126 51.5295L367.217 50.6601L367.47 49.4375L368.023 47.9523L368.593 46.9561L368.919 46.5033L369.925 45.4256L371.129 44.5562L371.962 44.1306L372.66 43.8499L374.344 43.4514L375.34 43.3699H376.164L377.731 43.551L378.827 43.8499L379.524 44.1306L380.357 44.5562L381.127 45.0815L381.689 45.5524L382.322 46.2135L382.884 46.9561L383.282 47.6082L383.627 48.3145L383.971 49.2473L384.315 50.8774L384.405 52.6705L384.36 53.5761L384.17 54.844L383.762 56.2115L383.355 57.108L382.965 57.7691L382.639 58.2401L381.915 59.0823L381.227 59.6981L380.475 60.2324L379.144 60.9025L378.256 61.2014L377.514 61.3735L376.354 61.5093L375.548 61.5274L375.349 61.5184ZM318.785 69.8319L319.564 70.4296L320.777 71.2265L321.837 71.8061L323.168 72.3948L324.789 72.9381L325.984 73.2279L326.971 73.4L328.475 73.554L329.77 73.5992L331.228 73.554L332.641 73.4181L334.008 73.1917L335.339 72.8838L336.625 72.4763L337.866 71.9873L339.351 71.2628L340.483 70.6017L341.814 69.6779L343.544 68.2018L344.232 67.5045L345.301 66.2638L346.08 65.2133L346.795 64.1084L347.438 62.9492L348.018 61.7357L348.525 60.4679L349.05 58.8287L349.449 57.1261L349.621 56.0756L349.784 54.6538L349.874 52.8154L349.766 49.836L349.594 48.3326L349.231 46.4218L348.733 44.6015L348.262 43.2974L347.71 42.0477L347.076 40.8523L346.379 39.7203L345.364 38.3166L344.232 37.0306L343.318 36.1431L342.005 35.0654L340.954 34.3409L339.451 33.4715L338.283 32.9191L337.486 32.5931L335.837 32.0497L334.56 31.7418L332.804 31.452L330.983 31.3071L329.335 31.2981L327.95 31.3796L325.966 31.6513L324.4 32.0226L323.204 32.4029L321.782 32.9916L320.723 33.5349L319.491 34.2957L318.585 34.9658L317.553 35.8895L316.81 36.6865V32.4573H304.739V88.732H318.785V69.8319ZM327.035 61.5184L325.468 61.3372L324.544 61.0927L323.666 60.7577L322.996 60.4226L322.217 59.9154L321.511 59.3358L320.877 58.6747L320.415 58.0861L320.007 57.4431L319.491 56.3926L319.228 55.6409L319.065 55.0523L318.857 53.7935L318.794 51.9823L318.984 50.2435L319.174 49.4375L319.582 48.3145L319.935 47.6082L320.442 46.8022L321.411 45.6792L321.963 45.1902L322.715 44.6559L323.367 44.2936L324.227 43.9133L324.934 43.6869L326.057 43.4514L327.651 43.3608L328.439 43.4061L329.398 43.551L330.494 43.8499L331.192 44.1306L332.034 44.5562L332.659 44.9728L333.229 45.4256L333.89 46.0777L334.361 46.6482L334.977 47.6082L335.321 48.3145L335.602 49.0571L335.973 50.6601L336.082 51.7559L336.1 52.6705L335.946 54.4365L335.774 55.2515L335.475 56.2115L335.086 57.108L334.705 57.7691L334.162 58.5298L333.537 59.2091L332.985 59.6981L332.233 60.2324L331.744 60.5131L330.712 60.9659L329.235 61.3735L328.058 61.5093L327.234 61.5274L327.035 61.5184Z" fill="white"/>
+</svg></a>
+    <span class="mono">Web připravujeme</span>
+  </header>
+
+  <section class="hero" id="hero" aria-label="Plamínek">
+    <div class="plamen"><svg id="plamen" role="img" aria-label="Animovaný pixelový plamínek"></svg></div>
+    <div class="zaklad" aria-hidden="true"></div>
+    <p class="cislo mono" id="cislo">Plamen č. 0000</p>
+    <div class="ovl">
+      <button class="btn" type="button" id="novy">Zapálit nový</button>
+      <button class="btn" type="button" id="hasit" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true" shape-rendering="crispEdges"><rect x="0" y="0" width="3" height="2" fill="currentColor"/><rect x="2" y="1" width="2" height="2" fill="currentColor"/><rect x="3" y="2" width="4" height="1" fill="currentColor"/><rect x="6" y="2" width="4" height="2" fill="#8C8A99"/><rect x="9" y="1" width="4" height="1" fill="#8C8A99"/><rect x="5" y="4" width="6" height="11" fill="#D9211C"/><rect x="6" y="5" width="1" height="9" fill="#F0605B"/><rect x="7" y="8" width="3" height="3" fill="#FFFFFF"/><rect x="5" y="15" width="6" height="1" fill="currentColor"/></svg><span>Uhasit</span></button>
+    </div>
+    <p class="stav" id="stav" role="status" aria-live="polite"></p>
+    <canvas id="pena" aria-hidden="true"></canvas>
+    <div class="kurzor" id="kurzor" aria-hidden="true"><svg viewBox="0 0 16 16" width="52" height="52" shape-rendering="crispEdges"><rect x="0" y="0" width="3" height="2" fill="#F1EEF6"/><rect x="2" y="1" width="2" height="2" fill="#F1EEF6"/><rect x="3" y="2" width="4" height="1" fill="#F1EEF6"/><rect x="6" y="2" width="4" height="2" fill="#8C8A99"/><rect x="9" y="1" width="4" height="1" fill="#8C8A99"/><rect x="5" y="4" width="6" height="11" fill="#D9211C"/><rect x="6" y="5" width="1" height="9" fill="#F0605B"/><rect x="7" y="8" width="3" height="3" fill="#FFFFFF"/><rect x="5" y="15" width="6" height="1" fill="#F1EEF6"/></svg></div>
+  </section>
+
+  <section class="text">
+    <span class="mono">FIALA PO · požární ochrana</span>
+    <h1>Nový web <span>připravujeme.</span></h1>
+    <p>Brzy tu najdete vše o požární ochraně – od požárně bezpečnostního řešení staveb přes revize až po kontrolu HZS. Do té doby jsme tu pro vás na e-mailu i telefonu.</p>
+  </section>
+
+  <section class="dole">
+    <div>
+      <span class="mono">Vánoční revize · 24·12</span>
+      <h2>Krásné Vánoce a bezpečný rok 2027</h2>
+      <p>přejí lidé z FIALA PO. Ať u vás hoří jen svíčky.</p>
+    </div>
+    <div>
+      <span class="mono">Kontakt</span>
+      <div><a href="mailto:info@fiala-po.cz">info@fiala-po.cz</a></div>
+      <div><a href="tel:+420732407350">+420 732 407 350</a></div>
+      <p>Veronika Fialová</p>
+    </div>
+  </section>
+
+  <footer>© 2026 FIALA PO je značka společnosti Fiala Libor s.r.o. · IČO 29954754 · Příčná 1892/4, 110 00 Praha 1</footer>
+</div>
+
+<script>
+(function(){
+var PAL=["#2B145E","#6A1B8A","#C2185B","#F04A23","#FF9F1C","#FFE14D"];
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* světýlka */
+function svetla(){var s=document.getElementById('svetla'),W=Math.max(320,innerWidth),H=60,sw=W<640?2:3,seg=W/sw,out='',k=0,cols=["#FFE14D","#FF9F1C","#F04A23","#C2185B","#FFE14D","#FF9F1C"];
+  s.setAttribute('viewBox','0 0 '+W+' '+H);
+  for(var i=0;i<sw;i++){var x0=i*seg,x1=x0+seg,sag=24;
+    out+='<path d="M'+x0+' 6 Q'+(x0+seg/2)+' '+(6+sag*2)+' '+x1+' 6" fill="none" stroke="#3A3160" stroke-width="1.5"/>';
+    var n=Math.max(5,Math.round(seg/70));for(var j=1;j<n;j++){var t=j/n,x=x0+seg*t,y=6+sag*2*2*t*(1-t);var c=cols[k%cols.length];var d=((k*0.37)%2.4).toFixed(2);
+      out+='<rect class="b" x="'+(x-4)+'" y="'+(y+1)+'" width="8" height="8" fill="'+c+'" style="animation-delay:-'+d+'s"/>';k++;}}
+  s.innerHTML=out;if(reduce)s.querySelectorAll('.b').forEach(function(r){r.style.animation='none';});}
+svetla();addEventListener('resize',svetla);
+
+/* mřížka + krátká stopa za myší + pár vloček */
+var cv=document.getElementById('teplo'),ctx=cv.getContext('2d'),g=document.createElement('canvas'),gx=g.getContext('2d');
+var CS=22,W=0,H=0,cols=0,rows=0,heat=new Float32Array(0),dpr=1,vl=[];
+var TH=[0.12,0.26,0.42,0.58,0.74,0.88];
+function rozmer(){dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;CS=W<560?18:22;cols=Math.ceil(W/CS)+1;rows=Math.ceil(H/CS)+1;heat=new Float32Array(cols*rows);
+  cv.width=g.width=Math.round(W*dpr);cv.height=g.height=Math.round(H*dpr);gx.setTransform(dpr,0,0,dpr,0,0);gx.fillStyle='#241D3B';gx.fillRect(0,0,W,H);gx.fillStyle='#2E2650';
+  for(var x=0;x<=cols;x++)gx.fillRect(x*CS,0,1,H);for(var y=0;y<=rows;y++)gx.fillRect(0,y*CS,W,1);
+  vl=[];if(!reduce)for(var i=0;i<Math.round(W/60);i++)vl.push(nova(true));kresli();}
+function nova(k){return {x:Math.random()*W,y:k?Math.random()*H:-6,v:14+Math.random()*18,s:Math.random()<.3?3:2,f:Math.random()*6.28,a:.35+Math.random()*.4};}
+function bod(px,py,v){var x=Math.floor(px/CS),y=Math.floor(py/CS);if(x<0||y<0||x>=cols||y>=rows)return;var i=y*cols+x;heat[i]=Math.max(0,Math.min(1,heat[i]+v));}
+var hasim=false;
+addEventListener('pointermove',function(e){if(hasim)return;bod(e.clientX,e.clientY,.95);if(Math.random()<.35)bod(e.clientX+(Math.random()<.5?-CS:CS),e.clientY,.45);start();},{passive:true});
+function kresli(){ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(g,0,0);ctx.setTransform(dpr,0,0,dpr,0,0);
+  for(var i=0;i<heat.length;i++){var h=heat[i];if(h<TH[0])continue;var l=0;for(var k=5;k>=0;k--)if(h>=TH[k]){l=k;break;}ctx.fillStyle=PAL[l];ctx.fillRect((i%cols)*CS+1,Math.floor(i/cols)*CS+1,CS-1,CS-1);}
+  ctx.fillStyle='#F1EEF6';for(var j=0;j<vl.length;j++){var f=vl[j];ctx.globalAlpha=f.a;ctx.fillRect(Math.round(f.x),Math.round(f.y),f.s,f.s);}ctx.globalAlpha=1;}
+var bezi=false,last=0;
+function start(){if(!bezi){bezi=true;last=performance.now();requestAnimationFrame(krok);}}
+function krok(ts){var dt=Math.min(50,ts-last);last=ts;var dec=Math.pow(0.9,dt/16),akt=false;
+  for(var i=0;i<heat.length;i++){if(heat[i]>0.01){heat[i]*=dec;akt=true;}else heat[i]=0;}
+  if(!reduce&&!document.hidden)for(var k=0;k<vl.length;k++){var f=vl[k];f.y+=f.v*dt/1000;f.f+=dt/1000;f.x+=Math.sin(f.f)*.2;if(f.y>H+4)vl[k]=nova(false);}
+  kresli();if(!reduce||akt)requestAnimationFrame(krok);else bezi=false;}
+addEventListener('resize',rozmer);document.addEventListener('visibilitychange',function(){if(!document.hidden)start();});
+
+/* plamínek (generátor z webu FIALA PO) */
+var THF=[0.06,0.24,0.42,0.6,0.76,0.9];
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function params(seed){var r=rng(seed);var p={tip:0.74+r()*0.2,w:0.34+r()*0.14,lean:(r()-0.5)*0.22,amp:0.5+r()*1.1,freq:0.6+r()*1.2,phase:r()*6.283,tongues:[],sparks:[],noise:[]};
+  var nt=Math.floor(r()*3);for(var i=0;i<nt;i++)p.tongues.push({off:(r()<0.5?-1:1)*(0.12+r()*0.12),tip:0.35+r()*0.3,w:0.12+r()*0.1,phase:r()*6.283});
+  var ns=Math.floor(r()*4);for(var j=0;j<ns;j++)p.sparks.push({u:0.3+r()*0.4,v:p.tip+0.02+r()*0.12,l:r()<0.6?0:1});
+  for(var k=0;k<400;k++)p.noise.push(r());return p;}
+function mrizka(p,cols,rows,t){t=t||0;var out=[],sila=p.sila==null?1:p.sila;
+  if(sila<=0.001){for(var yy=0;yy<rows;yy++){out.push([]);for(var xx=0;xx<cols;xx++)out[yy].push(-1);}return out;}
+  function n0(x,y){var i=((x*31+y*17+Math.floor(t*3)*7)%400+400)%400;return p.noise[i];}
+  function n(x,y){return (n0(x,y)*2+n0(x+1,y)+n0(x-1,y)+n0(x,y+1)+n0(x,y-1))/6;}
+  for(var y=0;y<rows;y++){out.push([]);for(var x=0;x<cols;x++){var u=(x+0.5)/cols,v=1-(y+0.5)/rows,h=0;
+    var fl=[{c:0.5,tip:p.tip*(0.3+0.7*sila)*(1+0.04*Math.sin(t*2.1)),w:p.w*(0.55+0.45*sila),ph:p.phase}];
+    if(sila>0.45)p.tongues.forEach(function(q){fl.push({c:0.5+q.off,tip:q.tip*sila*(1+0.08*Math.sin(t*2.7+q.phase)),w:q.w,ph:q.phase});});
+    fl.forEach(function(f,fi){if(v>f.tip)return;var axis=f.c+p.lean*v+p.amp*0.06*Math.sin(p.freq*v*6.283+f.ph+t*3)*v;
+      var w=f.w*Math.pow(1-v/f.tip,0.7)*Math.min(1,(v+0.08)/0.26);if(w<=0)return;var d=Math.abs(u-axis)/w,hh=(1-d)*(1-0.32*v/f.tip)*(fi?0.82:1);hh*=0.35+0.65*sila;if(hh>h)h=hh;});
+    if(h>0)h+=(n(x,y)-0.5)*0.3;var lev=-1;for(var k=0;k<6;k++)if(h>=THF[k])lev=k;out[y].push(lev);}}
+  if(sila>0.7)p.sparks.forEach(function(s,i){var sv=s.v+((t*0.15+i*0.3)%0.15);var yy=Math.round((1-sv)*rows-0.5),xx=Math.round(s.u*cols-0.5+Math.sin(t*2+i)*0.6);if(yy>=0&&yy<rows&&xx>=0&&xx<cols&&out[yy][xx]<0)out[yy][xx]=s.l;});
+  return out;}
+function paint(svg,p,c,r,t){var m=mrizka(p,c,r,t),s='';for(var y=0;y<r;y++)for(var x=0;x<c;x++){var l=m[y][x];if(l>=0)s+='<rect x="'+x+'" y="'+y+'" width="1.02" height="1.02" fill="'+PAL[l]+'"/>';}svg.setAttribute('viewBox','0 0 '+c+' '+r);svg.innerHTML=s;}
+var gs=document.getElementById('plamen'),gc=document.getElementById('cislo'),st=document.getElementById('stav'),gP=null,tNow=0,uhaseno=false;
+function seed(){var a=new Uint32Array(2);try{crypto.getRandomValues(a);}catch(e){a[0]=Math.random()*4294967296;a[1]=Date.now();}return (a[0]^a[1]^(Date.now()>>>0))>>>0;}
+function novy(){var s=seed();gP=params(s);gP.sila=1;uhaseno=false;paint(gs,gP,16,21,tNow);gc.textContent='Plamen č. '+String(s%10000).padStart(4,'0');st.textContent='';}
+document.getElementById('novy').addEventListener('click',novy);
+
+/* hašení */
+var sec=document.getElementById('hero'),btn=document.getElementById('hasit'),pc=document.getElementById('pena'),kur=document.getElementById('kurzor'),pctx=pc.getContext('2d'),cast=[],pb=false,pl=0,px=null,py=null,stisk=false,posl=0,sprejT=0;
+function pvel(){var w=sec.clientWidth,h=sec.clientHeight,d=Math.min(devicePixelRatio||1,2);pc.width=Math.round(w*d);pc.height=Math.round(h*d);pc.style.width=w+'px';pc.style.height=h+'px';pctx.setTransform(d,0,0,d,0,0);}
+function zap(on){hasim=on;sec.classList.toggle('hasim',on);btn.setAttribute('aria-pressed',on?'true':'false');btn.querySelector('span').textContent=on?'Hasím…':'Uhasit';
+  if(on){pvel();st.textContent='Přejeďte hasicím přístrojem přes plamínek.';pstart();}else kur.classList.remove('vid');}
+btn.addEventListener('click',function(){zap(!hasim);});
+function pos(e){var r=sec.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};}
+function stred(){var r=gs.getBoundingClientRect(),q=sec.getBoundingClientRect();return {x:r.left-q.left+r.width/2,y:r.top-q.top+r.height*0.62,r:r,q:q};}
+function sprej(x,y,mn){var c=stred(),dx=c.x-x,dy=c.y-y;for(var i=0;i<mn;i++){var sp=3+Math.random()*4,uh=Math.atan2(dy,dx)+(Math.random()-.5)*.6;cast.push({x:x,y:y,vx:Math.cos(uh)*sp,vy:Math.sin(uh)*sp,z:1,s:4+Math.floor(Math.random()*3)*2,k:0});}
+  var r=c.r,q=c.q;if(gP&&!uhaseno&&x>r.left-q.left-160&&x<r.right-q.left+160&&y>r.top-q.top-160&&y<r.bottom-q.top+160){gP.sila=Math.max(0,gP.sila-mn*0.0012);sprejT=performance.now();
+    if(gP.sila<=0.04){gP.sila=0;uhaseno=true;zap(false);for(var k=0;k<24;k++)cast.push({x:c.x+(Math.random()-.5)*60,y:c.y+30-Math.random()*30,vx:(Math.random()-.5)*.6,vy:-.6-Math.random()*1.2,z:1,s:8+Math.floor(Math.random()*3)*4,k:1});
+      st.textContent='Uhašeno. Ve skutečnosti to tak rychle nejde – proto se vyplatí prevence.';}
+    paint(gs,gP,16,21,tNow);}}
+sec.addEventListener('pointermove',function(e){if(!hasim)return;posl=performance.now();if(stisk&&e.pointerType==='mouse'&&e.buttons===0)stisk=false;var p=pos(e);kur.style.transform='translate('+(p.x-4)+'px,'+(p.y-4)+'px)';kur.classList.add('vid');
+  if(px!==null){var d=Math.hypot(p.x-px,p.y-py);if(d>2||stisk)sprej(p.x,p.y,Math.min(6,1+Math.round(d/8)));}px=p.x;py=p.y;pstart();});
+sec.addEventListener('pointerdown',function(e){if(!hasim||e.target.closest('button,a'))return;stisk=true;posl=performance.now();try{sec.setPointerCapture(e.pointerId);}catch(_){}var p=pos(e);px=p.x;py=p.y;kur.style.transform='translate('+(p.x-4)+'px,'+(p.y-4)+'px)';kur.classList.add('vid');sprej(p.x,p.y,4);pstart();});
+addEventListener('pointerup',function(){stisk=false;});
+sec.addEventListener('pointerleave',function(){kur.classList.remove('vid');px=py=null;stisk=false;});
+function pstart(){if(!pb){pb=true;pl=performance.now();requestAnimationFrame(pkrok);}}
+function pkrok(ts){var dt=Math.min(50,ts-pl);pl=ts;pctx.save();pctx.setTransform(1,0,0,1,0,0);pctx.clearRect(0,0,pc.width,pc.height);pctx.restore();
+  if(stisk&&px!==null&&performance.now()-posl<6000)sprej(px,py,2);
+  cast=cast.filter(function(c){c.x+=c.vx*dt/16;c.y+=c.vy*dt/16;if(c.k===0){c.vx*=.97;c.vy=c.vy*.97+.04;c.z-=.022*dt/16;}else{c.z-=.008*dt/16;c.s+=.03;}
+    if(c.z<=0)return false;pctx.globalAlpha=Math.max(0,c.z)*(c.k?.5:.9);pctx.fillStyle=c.k?'#8C8A99':(Math.random()<.5?'#FFFFFF':'#DCE6F2');var z=Math.round(c.s);pctx.fillRect(Math.round(c.x/2)*2,Math.round(c.y/2)*2,z,z);return true;});
+  pctx.globalAlpha=1;
+  if(gP&&!uhaseno&&gP.sila<1&&ts-sprejT>900){gP.sila=Math.min(1,gP.sila+0.0006*dt);if(reduce)paint(gs,gP,16,21,0);}
+  if(cast.length||(hasim&&gP&&gP.sila<1&&!uhaseno))requestAnimationFrame(pkrok);else pb=false;}
+addEventListener('resize',function(){if(hasim)pvel();});
+
+rozmer();novy();start();
+if(!reduce){var t0=null,tl=0;(function tick(ts){if(!t0)t0=ts;if(ts-tl>110){tl=ts;tNow=(ts-t0)/1000;if(gP)paint(gs,gP,16,21,tNow);}requestAnimationFrame(tick);})(performance.now());}
+})();
+</script>
+</body>
+</html>
